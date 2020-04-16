@@ -14,7 +14,7 @@ function App() {
         url: "http: teste.com.br",
         techs: ["node, reactjs"],
       })
-      .then((repository) => setRepositories([...repositories], repository));
+      .then((repository) => setRepositories([...repositories, repository.data]));
   }
 
   async function handleRemoveRepository(id) {
@@ -22,7 +22,7 @@ function App() {
       const idIndex = repositories.findIndex(
         (repository) => (repository.id = id)
       );
-      repositories.splice(idIndex);
+      repositories.splice(idIndex, 1);
       setRepositories([...repositories], repositories);
     });
   }
@@ -31,7 +31,7 @@ function App() {
     api.get("/repositories").then((response) => {
       setRepositories(response.data);
     });
-  }, [repositories]);
+  }, []);
 
   return (
     <div>
